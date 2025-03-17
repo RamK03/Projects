@@ -2,7 +2,6 @@ import java.util.*;
 
 class XOGame
 {
-
     static Scanner sc=new Scanner(System.in);
 
     String user1;
@@ -37,7 +36,7 @@ class XOGame
             user1Icon();
             user2Icon();
 
-            if(user1==user2)
+            if(user1.equals(user2))
             {
                 System.out.println(user2+" is already choosed, choose another");
                 user2Icon();
@@ -62,10 +61,8 @@ class XOGame
         {
 
             positionOccupied1();
-            boolean s=winnerValidation().equals(user1);
             c=c+1;
-
-            if(s)
+            if(winnerValidation(user1))
             {
                 System.out.println("User1 is the Winner");
                 count =1;
@@ -78,8 +75,7 @@ class XOGame
                 }
                 positionOccupied2();
                 c=c+1;
-                boolean s1=winnerValidation().equals(user2);
-                if(s1)
+                if(winnerValidation(user2))
                 {
                     System.out.println("User2 is the Winner");
                     count=1;
@@ -99,12 +95,22 @@ class XOGame
     {
         System.out.println("Hi user1,Choose your Icon X or O");
         user1=sc.next();
+        if(!user1.equals("x")&&!user1.equals("o"))
+        {
+            System.out.println("Invalid Icon");
+            user1Icon();
+        }
     }
 
     void user2Icon()
     {
         System.out.println("Hi user2,Choose your Icon X or O");
         user2=sc.next();
+        if(!user2.equals("x")&& !user2.equals("o"))
+        {
+            System.out.println("Invalid Icon");
+            user2Icon();
+        }
     }
 
     void position(int position,String s)
@@ -192,73 +198,40 @@ class XOGame
 
     }
 
-    String winnerValidation()
+    boolean winnerValidation(String s)
     {
-        if((arr[0][0].equals(arr[0][1])) && (arr[0][0].equals(arr[0][2])) && arr[0][0].equals(user1))
+        if((arr[0][0].equals(arr[0][1])) && (arr[0][0].equals(arr[0][2])) && arr[0][0].equals(s))
         {
-            return user1;
+            return true;
         }
-        else if((arr[0][0].equals(arr[0][1])) && (arr[0][0].equals(arr[0][2])) && arr[0][0].equals(user2))
+        else if((arr[1][0].equals(arr[1][1])) && (arr[1][0].equals(arr[1][2])) && arr[1][0].equals(s))
         {
-            return user2;
+            return true;
         }
-        else if((arr[1][0].equals(arr[1][1])) && (arr[1][0].equals(arr[1][2])) && arr[1][0].equals(user1))
+        else if((arr[2][0].equals(arr[2][1])) && (arr[2][0].equals(arr[2][2])) && arr[2][0].equals(s))
         {
-            return user1;
+            return true;
         }
-        else if((arr[1][0].equals(arr[1][1])) && (arr[1][0].equals(arr[1][2])) && arr[1][0].equals(user2))
+        else if((arr[0][0].equals(arr[1][0])) && (arr[0][0].equals(arr[2][0])) && arr[0][0].equals(s))
         {
-            return user2;
+            return true;
         }
-        else if((arr[2][0].equals(arr[2][1])) && (arr[2][0].equals(arr[2][2])) && arr[2][0].equals(user1))
+        else if((arr[0][2].equals(arr[1][2])) && (arr[0][2].equals(arr[2][2])) && arr[0][2].equals(s))
         {
-            return user1;
+            return true;
         }
-        else  if((arr[2][0].equals(arr[2][1])) && (arr[2][0].equals(arr[2][2])) && arr[2][0].equals(user2))
+        else if((arr[0][2].equals(arr[1][1])) && (arr[0][2].equals(arr[2][0])) && arr[0][2].equals(s))
         {
-            return user2;
+            return true;
         }
-        else if((arr[0][0].equals(arr[1][0])) && (arr[0][0].equals(arr[2][0])) && arr[0][0].equals(user1))
+        else if((arr[0][0].equals(arr[1][1])) && (arr[0][0].equals(arr[2][2])) && arr[0][0].equals(s))
         {
-            return user1;
-        }
-        else  if((arr[0][0].equals(arr[1][0])) && (arr[0][0].equals(arr[2][0])) && arr[0][0].equals(user2))
-        {
-            return user2;
-        }
-        else if((arr[0][2].equals(arr[1][2])) && (arr[0][2].equals(arr[2][2])) && arr[0][2].equals(user1))
-        {
-            return user1;
-        }
-        else  if((arr[0][2].equals(arr[1][2])) && (arr[0][2].equals(arr[2][2])) && arr[0][2].equals(user2))
-        {
-            return user2;
-        }
-        else if((arr[0][2].equals(arr[1][1])) && (arr[0][2].equals(arr[2][0])) && arr[0][2].equals(user1))
-        {
-            return user1;
-        }
-        else if((arr[0][2].equals(arr[1][1])) && (arr[0][2].equals(arr[2][0])) && arr[0][2].equals(user2))
-        {
-            return user2;
-        }
-        else if((arr[0][0].equals(arr[1][1])) && (arr[0][0].equals(arr[2][2])) && arr[0][0].equals(user1))
-        {
-            return user1;
-        }
-        else if((arr[0][0].equals(arr[1][1])) && (arr[0][0].equals(arr[2][2])) && arr[0][0].equals(user2))
-        {
-            return user2;
+            return true;
         }
         else
         {
-
-            return "No winner";
+            return false;
         }
-
-
-
-
     }
 
 
