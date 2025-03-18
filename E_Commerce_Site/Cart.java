@@ -21,6 +21,7 @@ public class Cart
 
             }
         }
+        System.out.println();
         System.out.println("your product is added to Cart");
         Main.menu();
     }

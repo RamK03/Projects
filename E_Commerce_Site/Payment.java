@@ -19,6 +19,7 @@ public class Payment
              if(user_opt<1||user_opt>3)
              {
                  System.out.println("Invalid Option");
+                 System.out.println();
              }
          }while(user_opt<1||user_opt>3);
     }

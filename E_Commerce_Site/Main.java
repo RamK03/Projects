@@ -37,7 +37,7 @@ public class Main
     public static void main(String[] args)
     {
         System.out.println("Welcome");
-       // menu();
-       Payment.payment_Menu();
+        menu();
+
     }
 }

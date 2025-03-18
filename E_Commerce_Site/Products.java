@@ -30,7 +30,7 @@ public class Products
         {
             System.out.println((i+1)+"."+name[i]+" Price-"+price[i]);
         }
-
+        System.out.println();
     }
     void action()
     {
