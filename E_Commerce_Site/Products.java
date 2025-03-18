@@ -5,82 +5,117 @@ import java.util.Scanner;
 public class Products
 {
     Scanner sc=new Scanner(System.in);
-    Cart cart_obj=new Cart();
 
-    String name="";
-    int price;
-    int product_Id;
-    private int stock_available;
 
-    int getStock_available(Products obj)
+    static String [] name={"Apple 1kg","Onion 1kg","coconut_oil 1l","Ghee 1l","Milk 1l"};
+    static int [] price={10,30,100,500,50};
+    static int [] product_Id={1001,1002,1003,1004,1005};
+    private static int [] stock={100,100,100,100,100};
+
+
+    int getStock(int  id)
     {
-        return obj.stock_available;
+        return stock[id];
     }
 
-    void set_stock_available(int stock)
+    void set_stock(int id,int new_stock_qty)
     {
-        this.stock_available=stock;
-    }
-
-    Products(){}
-    Products(String name,int price,int product_Id,int stock_available)
-    {
-        this.name=name;
-        this.price=price;
-        this.product_Id=product_Id;
-        this.stock_available=stock_available;
+         stock[id]+=new_stock_qty;
     }
 
 
     void product_Display()
     {
-        Products a=new Products("Apple 1kg",10,001,100);
-        Products o=new Products("Onion 1kg",30,002,100);
-        Products c=new Products("coconut_oil 1l",100,003,100);
-        Products g=new Products("Ghee 1l",500,004,100);
-        Products m=new Products("Milk 1l",50,005,100);
-
-
-        System.out.println("1."+a.name+" Price:"+a.price);
-        System.out.println("2."+o.name+" Price:"+o.price);
-        System.out.println("3."+c.name+" Price:"+c.price);
-        System.out.println("4."+g.name+" Price:"+g.price);
-        System.out.println("5."+m.name+" Price:"+m.price);
-
-        System.out.println("Choose Your Product To buy");
-        int option=sc.nextInt();
-        switch(option)
+        for(int i=0;i<name.length;i++)
         {
-            case 1:
-                System.out.println("Enter Quantity");
-                int qty1=sc.nextInt();
-                cart_obj.add("Apple",0,qty1,a.price);
-                break;
-
-            case 2:
-                System.out.println("Enter Quantity");
-                int qty2=sc.nextInt();
-                cart_obj.add("Onion",1,qty2,o.price);
-                break;
-
-            case 3:
-                System.out.println("Enter Quantity");
-                int qty3=sc.nextInt();
-                cart_obj.add("coconut oil",2,qty3,c.price);
-                break;
-
-            case 4:
-                System.out.println("Enter Quantity");
-                int qty4=sc.nextInt();
-                cart_obj.add("ghee",3,qty4,g.price);
-                break;
-
-            case 5:
-                System.out.println("Enter Quantity");
-                int qty5=sc.nextInt();
-                cart_obj.add("milk",4,qty5,m.price);
-                break;
+            System.out.println((i+1)+"."+name[i]+" Price-"+price[i]);
         }
+
+    }
+    void action()
+    {
+        Cart cart_obj=new Cart();
+
+        int user_opt;
+        do
+        {
+            product_Display();
+            System.out.println();
+            System.out.println("1.Add to Cart");
+            System.out.println("2.Go to Cart");
+            System.out.println("3.Exit");
+
+            System.out.println("Enter Your Option");
+            user_opt = sc.nextInt();
+            if (user_opt<0||user_opt>3)
+            {
+                System.out.println("Invalid Option");
+                System.out.println("Enter Correct Option");
+                System.out.println();
+
+            }
+            else if(user_opt==1)
+            {
+                add_To_Cart();
+            }
+            else if(user_opt==2)
+            {
+                cart_obj.cart_Display();
+            }
+            else if(user_opt==3)
+            {
+               return;
+            }
+        }while(user_opt<0||user_opt>3);
+    }
+
+    void add_To_Cart()
+    {
+        Cart cart_obj=new Cart();
+        int option;
+
+        do {
+            product_Display();
+            System.out.println("Choose Your Product To buy");
+            System.out.println("Enter 1 to 5");
+            option= sc.nextInt();
+            switch (option) {
+                case 1:
+                    System.out.println("Enter Quantity");
+                    int qty1 = sc.nextInt();
+                    cart_obj.cart_add("Apple", product_Id[option - 1], qty1, price[option - 1]);
+                    break;
+
+                case 2:
+                    System.out.println("Enter Quantity");
+                    int qty2 = sc.nextInt();
+                    cart_obj.cart_add("Onion", product_Id[option - 1], qty2, price[option - 1]);
+                    break;
+
+                case 3:
+                    System.out.println("Enter Quantity");
+                    int qty3 = sc.nextInt();
+                    cart_obj.cart_add("coconut oil", product_Id[option - 1], qty3, price[option - 1]);
+                    break;
+
+                case 4:
+                    System.out.println("Enter Quantity");
+                    int qty4 = sc.nextInt();
+                    cart_obj.cart_add("ghee", product_Id[option - 1], qty4, price[option - 1]);
+                    break;
+
+                case 5:
+                    System.out.println("Enter Quantity");
+                    int qty5 = sc.nextInt();
+                    cart_obj.cart_add("milk", product_Id[option - 1], qty5, price[option - 1]);
+                    break;
+
+                default:
+                    System.out.println("Invalid Option");
+                    System.out.println("Enter Correct Option");
+                    System.out.println();
+            }
+        }while(option<1||option>5);
     }
 
 
