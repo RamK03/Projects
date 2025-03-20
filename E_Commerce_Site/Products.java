@@ -6,29 +6,22 @@ public class Products
 {
     Scanner sc=new Scanner(System.in);
 
-
     static String [] name={"Apple 1kg","Onion 1kg","coconut_oil 1l","Ghee 1l","Milk 1l"};
     static int [] price={10,30,100,500,50};
     static int [] product_Id={1001,1002,1003,1004,1005};
-    private static int [] stock={100,100,100,100,100};
-
-
-    int getStock(int  id)
-    {
-        return stock[id];
-    }
-
-    void set_stock(int id,int new_stock_qty)
-    {
-         stock[id]+=new_stock_qty;
-    }
+    static int [] stock={100,100,100,100,100};
 
 
     void product_Display()
     {
+        System.out.println("Product List");
+        int k=1;
         for(int i=0;i<name.length;i++)
         {
-            System.out.println((i+1)+"."+name[i]+" Price-"+price[i]);
+            if(stock[i]>0)
+            {
+                System.out.println(( k++) + "." + name[i] + " Price-" + price[i]);
+            }
         }
         System.out.println();
     }
@@ -39,14 +32,17 @@ public class Products
         int user_opt;
         do
         {
+            System.out.println("Menu");
+            System.out.println();
             product_Display();
             System.out.println();
             System.out.println("1.Add to Cart");
             System.out.println("2.Go to Cart");
             System.out.println("3.Exit");
-
+            System.out.println();
             System.out.println("Enter Your Option");
             user_opt = sc.nextInt();
+            System.out.println();
             if (user_opt<0||user_opt>3)
             {
                 System.out.println("Invalid Option");
@@ -117,6 +113,4 @@ public class Products
             }
         }while(option<1||option>5);
     }
-
-
 }

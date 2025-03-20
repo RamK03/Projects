@@ -13,40 +13,47 @@ public class Cart
     {
         for(int i=0;i<product_Id.length;i++)
         {
-            if(product_Id[i]==id)
+            if(product_Id[i]==id&&product_name [i]==null&&Products.stock[i]>0)
             {
                 product_name [i]=name;
                 amount[i]=price*qty;
                 quantity[i]=qty;
+                Products.stock[i]-=qty;
 
+            }
+            else if(Products.stock[i]==0)
+            {
+                System.out.println(" Product is out of Stock");
+                System.out.println("Choose another");
+                Main.user_menu();
+                return;
             }
         }
         System.out.println();
         System.out.println("your product is added to Cart");
-        Main.menu();
+        Main.user_menu();
     }
 
     void remove(int id)
     {
         product_name[id]=null;
         amount[id]=0;
+        Products.stock[id]+=quantity[id];
         quantity[id]=0;
-
     }
 
     void   add_Quantity(int id,int qty)
     {
         quantity[id]=Products.price[id]*qty;
-        System.out.println(Products.price[id]);
     }
 
     void cart_Menu()
     {
         Products product_obj=new Products();
+
         int user_opt;
         do
         {
-            System.out.println();
             System.out.println("1.Add or minus Quantity");
             System.out.println("2.Add New Product");
             System.out.println("3.Remove Product");
@@ -63,7 +70,7 @@ public class Cart
             }
             else if (user_opt==1)
             {
-                System.out.println("Enter the  product");
+                System.out.println("Enter the  product name");
                 sc.nextLine();
                 String option=sc.nextLine();
                 System.out.println("Enter the new quantity ");
@@ -73,12 +80,13 @@ public class Cart
                     if(product_name[i]==null){
                         continue;
                     }
-                    if(product_name[i].equalsIgnoreCase(option))
-                    {
-                        add_Quantity(i,qty);
-                        System.out.println("Quantity updated");
-                        cart_Display();
-                    }
+
+                        if (product_name[i].equalsIgnoreCase(option)) {
+                            add_Quantity(i, qty);
+                            System.out.println("Quantity updated");
+                            cart_Display();
+                        }
+
                 }
             }
             else if(user_opt==2)
@@ -87,7 +95,7 @@ public class Cart
             }
             else if(user_opt==3)
             {
-                System.out.println("Enter the  product to remove");
+                System.out.println("Enter the  product name to remove");
                 sc.nextLine();
                 String option=sc.nextLine();
                 for(int i=0;i<product_name.length;i++)
@@ -107,10 +115,9 @@ public class Cart
             }
             else if(user_opt==4)
             {
-                Payment payment_obj =new Payment();
-                payment_obj.payment_Menu();
+                Payment.payment_Menu();
             }
-        }while( user_opt<0||user_opt>4);
+        }while( user_opt<1||user_opt>4);
     }
 
     void cart_Display()
@@ -139,7 +146,7 @@ public class Cart
             {
                 if(product_name[j]!=null)
                 {
-                    System.out.println(k+"."+product_name[j]+" price-"+amount[j]+" Qty-"+quantity[j]);
+                    System.out.println(k+"."+product_name[j]+" price-"+(amount[j]*quantity[j])+" Qty-"+quantity[j]);
                     k++;
                 }
             }
@@ -156,7 +163,7 @@ public class Cart
                user_opt= sc.nextInt();
                if (user_opt == 1)
                {
-                   Main.menu();
+                   Main.user_menu();
                } else if (user_opt == 0)
                {
                    System.out.println("Thank You!");
