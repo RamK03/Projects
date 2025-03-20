@@ -140,7 +140,7 @@ public class Main
             user_opt = sc.nextInt();
             System.out.println();
 
-            if (user_opt < 0 || user_opt > 4) {
+            if (user_opt < 1 || user_opt > 4) {
                 System.out.println("Invalid Option");
                 user_menu();
             } else if (user_opt == 1) {
@@ -148,7 +148,7 @@ public class Main
             } else if (user_opt == 2) {
                 cart_Obj.cart_Display();
             }
-        } while (user_opt < 0 || user_opt > 4);
+        } while (user_opt < 1 || user_opt > 4);
 
     }
    static void product_Display()
