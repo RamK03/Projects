@@ -1,4 +1,4 @@
-package E_Commerce_Site;
+package E_Commerce_Site_Console_Project;
 import java.util.Scanner;
 
 public class Payment extends Cart
@@ -117,6 +117,7 @@ public class Payment extends Cart
     void cash()
     {
         cart_Display();
+        System.out.println("Total price :     "+Payment.total_price);
         System.out.println("Enter the amount");
         int cash=sc.nextInt();
         if(cash==Payment.total_price)
@@ -127,14 +128,14 @@ public class Payment extends Cart
         }
         else if(cash<Payment.total_price)
         {
-            System.out.println("you gave "+(Payment.total_price-cash)+"less");
+            System.out.println("you gave "+(Payment.total_price-cash)+" less");
             System.out.println();
             System.out.println("Give the balance amount");
             int balance=sc.nextInt();
             if(balance>Payment.total_price-cash)
             {
-                System.out.println("you gave "+(cash-Payment.total_price)+"more");
-                System.out.println("Your balance"+(cash-Payment.total_price));
+                System.out.println("you gave "+(cash-Payment.total_price)+" more");
+                System.out.println("Your balance "+(cash-Payment.total_price));
                 System.out.println("Your payment successful");
                 System.out.println("Thank You");
             }

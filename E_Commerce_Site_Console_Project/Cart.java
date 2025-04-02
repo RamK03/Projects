@@ -1,4 +1,4 @@
-package E_Commerce_Site;
+package E_Commerce_Site_Console_Project;
 import java.util.*;
 public class Cart
 {
@@ -13,13 +13,12 @@ public class Cart
     {
         for(int i=0;i<product_Id.length;i++)
         {
-            if(product_Id[i]==id&&product_name [i]==null&&Products.stock[i]>0)
+            if(product_Id[i]==id&&product_name [i]==null&&Products.stock[i]>0&&qty<Products.stock[i])
             {
                 product_name [i]=name;
                 amount[i]=price*qty;
                 quantity[i]=qty;
                 Products.stock[i]-=qty;
-
             }
             else if(Products.stock[i]==0)
             {
@@ -27,6 +26,10 @@ public class Cart
                 System.out.println("Choose another");
                 Main.user_menu();
                 return;
+            }
+            else
+            {
+                System.out.println("Enter Quantity is not available ");
             }
         }
         System.out.println();
@@ -54,14 +57,15 @@ public class Cart
         int user_opt;
         do
         {
-            System.out.println("1.Add or minus Quantity");
-            System.out.println("2.Add New Product");
-            System.out.println("3.Remove Product");
-            System.out.println("4.Payment");
+            System.out.println("1.Add Quantity");
+            System.out.println("2.Remove Quantity");
+            System.out.println("3.Add New Product");
+            System.out.println("4.Remove Product");
+            System.out.println("5.Payment");
             System.out.println();
             System.out.println("Enter Your Option");
              user_opt=sc.nextInt();
-            if(user_opt<1||user_opt>4)
+            if(user_opt<1||user_opt>5)
             {
                 System.out.println("Invalid Option");
                 System.out.println("Enter Correct Option");
@@ -89,11 +93,11 @@ public class Cart
 
                 }
             }
-            else if(user_opt==2)
+            else if(user_opt==3)
             {
                 product_obj.action();
             }
-            else if(user_opt==3)
+            else if(user_opt==4)
             {
                 System.out.println("Enter the  product name to remove");
                 sc.nextLine();
@@ -113,11 +117,11 @@ public class Cart
                 }
 
             }
-            else if(user_opt==4)
+            else if(user_opt==5)
             {
                 Payment.payment_Menu();
             }
-        }while( user_opt<1||user_opt>4);
+        }while( user_opt<1||user_opt>5);
     }
 
     void cart_Display()

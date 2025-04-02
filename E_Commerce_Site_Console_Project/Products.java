@@ -1,4 +1,4 @@
-package E_Commerce_Site;
+package E_Commerce_Site_Console_Project;
 
 import java.util.Scanner;
 
