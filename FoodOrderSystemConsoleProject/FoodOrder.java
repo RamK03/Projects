@@ -47,6 +47,7 @@ class Order extends FoodOrder
         System.out.print("Enter Choice (Comma-separated :");
         String input=sc.nextLine();
         String [] input1=input.split(",");
+
         Arrays.sort(input1);
         int j=0,l=0;
 
